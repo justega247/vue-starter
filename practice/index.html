@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 101</title>
+</head>
+<body>
+  <h1>Hello!</h1>
+  <div id="app">
+   <template v-for="game in games" :key="game.name">
+    <h1>{{ game.name }} - <small>{{ game.console }}</small></h1>
+
+    <span v-for="star in game.rating" @click="increaseRating(game)">❤️</span>
+
+    <div v-if="game.rating > 5">Wow, this game must be <b>Really</b> good</div>
+   </template>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        games : [
+          { name: 'Super Mario 64', console: 'Nintendo 64', rating: 4 },
+          { name: 'The Legend of Zelda Ocarina of Time', console: 'Nintendo 64', rating: 5 },
+          { name: 'Secret of Mana', console: 'Super Nintendo', rating: 4 },
+          { name: 'Fallout 76', console: 'Multiple', rating: 1 },
+          { name: 'Super Metroid', console: 'Super Nintendo', rating: 6 }
+        ]
+      },
+      methods: {
+        increaseRating(game) {
+          const newRating = game.rating + 1;
+          game.rating = newRating;
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
